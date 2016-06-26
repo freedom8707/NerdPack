@@ -160,11 +160,11 @@ function DiesalStyle:StyleTexture(texture,style)
 			texture:SetHorizTile(textureStyle.texTile)
 			texture:SetVertTile(textureStyle.texTile)		
 		else		
-			texture:SetTexture(textureStyle.red,textureStyle.green,textureStyle.blue)	
+			texture:SetColorTexture(textureStyle.red,textureStyle.green,textureStyle.blue)	
 		end
 		if textureStyle.gradient then
 			texture:SetAlpha(1)
-			texture:SetTexture(1,1,1,1)
+			texture:SetColorTexture(1,1,1,1)
 			texture:SetGradientAlpha(textureStyle.gradient,textureStyle.red,textureStyle.green,textureStyle.blue,textureStyle.alpha, textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd,textureStyle.alphaEnd)		
 		end	
 end
@@ -172,7 +172,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	if not leftTexture.style or style.clear then leftTexture.style = {}	end			
 	local textureStyle = leftTexture.style			
 	-- ~~ Format New Settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	local red,green,blue									= DiesalTools:GetColor(style.color)		
+	local red,green,blue									=0,0,0	
 	local redEnd,greenEnd,blueEnd						= DiesalTools:GetColor(style.colorEnd)
 	local offset											= style.offset and type(style.offset)=='number' and {style.offset,style.offset,style.offset,style.offset} or style.offset	
 -- Setting ~~~~~~~~~~~~~~~~~~~~~~~ New Setting ~~~~~~~~~~~~~~~ Old Setting ~~~~~~~~~~~~~~~~~ Default ~~~~~~~~~~~~~~~
@@ -196,7 +196,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	leftTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)	
 	leftTexture:SetDrawLayer(textureStyle.layer, 0)
 	leftTexture:SetWidth(1)	
-	leftTexture:SetTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
+	leftTexture:SetColorTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
 	leftTexture:SetAlpha(textureStyle.alpha)				
 	if textureStyle.offset[1] 	then leftTexture:SetPoint("LEFT", 		-textureStyle.offset[1],0) 	
 	else								  		  leftTexture:SetPoint("RIGHT", 	-textureStyle.width,0)		end	
@@ -205,7 +205,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	if textureStyle.height		then leftTexture:SetHeight(textureStyle.height) 						end		
 	if textureStyle.gradient =='VERTICAL' then
 		leftTexture:SetAlpha(1)
-		leftTexture:SetTexture(1,1,1,1)
+		leftTexture:SetColorTexture(1,1,1,1)
 		leftTexture:SetGradientAlpha(textureStyle.gradient,textureStyle.red,textureStyle.green,textureStyle.blue,textureStyle.alpha, textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd,textureStyle.alphaEnd)		
 	end
 
@@ -213,7 +213,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	rightTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)		
 	rightTexture:SetDrawLayer(textureStyle.layer, 0)
 	rightTexture:SetWidth(1)	
-	rightTexture:SetTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
+	rightTexture:SetColorTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
 	rightTexture:SetAlpha(textureStyle.alpha)			
 	if textureStyle.offset[2] 	then rightTexture:SetPoint("RIGHT", 	textureStyle.offset[2],0) 	
 	else								  	  rightTexture:SetPoint("LEFT", 		textureStyle.width-(textureStyle.offset[1]+1),0)	end
@@ -223,11 +223,11 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	if textureStyle.gradient then 		
 		if textureStyle.gradient =='VERTICAL' then
 			rightTexture:SetAlpha(1)
-			rightTexture:SetTexture(1,1,1,1)
+			rightTexture:SetColorTexture(1,1,1,1)
 			rightTexture:SetGradientAlpha(textureStyle.gradient,textureStyle.red,textureStyle.green,textureStyle.blue,textureStyle.alpha, textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd,textureStyle.alphaEnd)		
 		else -- HORIZONTAL
 			rightTexture:SetAlpha(textureStyle.alphaEnd)
-			rightTexture:SetTexture(textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd)
+			rightTexture:SetColorTexture(textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd)
 		end	 		
 	end
 	
@@ -235,7 +235,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	topTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)				
 	topTexture:SetDrawLayer(textureStyle.layer, 0)
 	topTexture:SetHeight(1)	
-	topTexture:SetTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
+	topTexture:SetColorTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
 	topTexture:SetAlpha(textureStyle.alpha)		
 	if textureStyle.offset[1] 	then topTexture:SetPoint("LEFT", 		-textureStyle.offset[1]+1,0) 	end	
 	if textureStyle.offset[2] 	then topTexture:SetPoint("RIGHT", 		(textureStyle.offset[2])-1,0) end	
@@ -245,11 +245,11 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	if textureStyle.gradient then 		
 		if textureStyle.gradient =='HORIZONTAL' then
 			topTexture:SetAlpha(1)
-			topTexture:SetTexture(1,1,1,1)
+			topTexture:SetColorTexture(1,1,1,1)
 			topTexture:SetGradientAlpha(textureStyle.gradient,textureStyle.red,textureStyle.green,textureStyle.blue,textureStyle.alpha, textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd,textureStyle.alphaEnd)		
 		else -- VERTICAL							
 			topTexture:SetAlpha(textureStyle.alphaEnd)
-			topTexture:SetTexture(textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd)
+			topTexture:SetColorTexture(textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd)
 		end	 		
 	end
 	
@@ -257,7 +257,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	bottomTexture:SetGradientAlpha('HORIZONTAL',1,1,1,1,1,1,1,1)				
 	bottomTexture:SetDrawLayer(textureStyle.layer, 0)
 	bottomTexture:SetHeight(1)	
-	bottomTexture:SetTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
+	bottomTexture:SetColorTexture(textureStyle.red,textureStyle.green,textureStyle.blue)
 	bottomTexture:SetAlpha(textureStyle.alpha)		
 	if textureStyle.offset[1] 	then bottomTexture:SetPoint("LEFT", 		-textureStyle.offset[1]+1,0) 	end	
 	if textureStyle.offset[2] 	then bottomTexture:SetPoint("RIGHT", 		textureStyle.offset[2]-1,0) 	end	
@@ -266,7 +266,7 @@ function DiesalStyle:StyleOutline(leftTexture,rightTexture,topTexture,bottomText
 	if textureStyle.width		then bottomTexture:SetWidth(textureStyle.width-2) 								end		
 	if style.gradient =='HORIZONTAL' then
 		bottomTexture:SetAlpha(1)
-		bottomTexture:SetTexture(1,1,1,1)
+		bottomTexture:SetColorTexture(1,1,1,1)
 		bottomTexture:SetGradientAlpha(textureStyle.gradient,textureStyle.red,textureStyle.green,textureStyle.blue,textureStyle.alpha, textureStyle.redEnd,textureStyle.greenEnd,textureStyle.blueEnd,textureStyle.alphaEnd)		
 	end
 					

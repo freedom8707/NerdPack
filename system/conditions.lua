@@ -1042,8 +1042,9 @@ NeP.DSL.RegisterConditon("vengeance", function(unit, spell)
 	return vengeance / UnitHealthMax("player") * 100
 end)
 
+-- Blizz Removed UnitIsTappedByPlayer is Legion!
 NeP.DSL.RegisterConditon('modifier.taunt', function()
-	for i=1,#NeP.OM.unitEnemie do
+	--[[for i=1,#NeP.OM.unitEnemie do
 		local Obj = NeP.OM.unitEnemie[i]
 		if NeP.Engine.Infront('player', Obj.key) then
 			if UnitIsTappedByPlayer(Obj.key)
@@ -1056,7 +1057,7 @@ NeP.DSL.RegisterConditon('modifier.taunt', function()
 				end
 			end
 		end
-	end
+	end]]
 	return false
 end)
 

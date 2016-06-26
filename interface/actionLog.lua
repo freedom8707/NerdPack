@@ -15,7 +15,7 @@ ActionLog:SetMovable(true)
 ActionLog:EnableMouseWheel(true)
 
 local ActionLog_texture = ActionLog:CreateTexture(nil, "BACKGROUND")
-ActionLog_texture:SetTexture(0,0,0,0.9)
+ActionLog_texture:SetColorTexture(0,0,0,0.9)
 ActionLog_texture:SetAllPoints(ActionLog)
 ActionLog.texture = ActionLogHeader_texture
 
@@ -69,7 +69,7 @@ ActionLogDivA:SetPoint("LEFT", PE_ActionLog, 125, 0)
 ActionLogDivA:SetMovable(true)
 
 local ActionLogDivA_texture = ActionLogDivA:CreateTexture(nil, "BACKGROUND")
-ActionLogDivA_texture:SetTexture(0,0,0,0.5)
+ActionLogDivA_texture:SetColorTexture(0,0,0,0.5)
 ActionLogDivA_texture:SetAllPoints(ActionLogDivA)
 ActionLogDivA.texture = ActionLogDivA_texture
 
@@ -81,7 +81,7 @@ ActionLogDivB:SetPoint("LEFT", PE_ActionLog, 375, 0)
 ActionLogDivB:SetMovable(true)
 
 local ActionLogDivB_texture = ActionLogDivB:CreateTexture(nil, "BACKGROUND")
-ActionLogDivB_texture:SetTexture(0,0,0,0.5)
+ActionLogDivB_texture:SetColorTexture(0,0,0,0.5)
 ActionLogDivB_texture:SetAllPoints(ActionLogDivB)
 ActionLogDivB.texture = ActionLogDivB_texture
 
@@ -93,7 +93,7 @@ ActionLogHeader:SetHeight(log_height)
 ActionLogHeader:SetPoint("TOPLEFT", PE_ActionLog, "TOPLEFT")
 ActionLogHeader:SetPoint("TOPRIGHT", PE_ActionLog, "TOPRIGHT")
 local ActionLogHeader_texture = ActionLogHeader:CreateTexture(nil, "BACKGROUND")
-ActionLogHeader_texture:SetTexture(0.15,0.15,0.15,1)
+ActionLogHeader_texture:SetColorTexture(0.15,0.15,0.15,1)
 ActionLogHeader_texture:SetGradient("VERTICAL", 0.8,0.8,0.8, 0,0,0)
 ActionLogHeader_texture:SetAllPoints(ActionLogHeader)
 ActionLogHeader.texture = ActionLogHeader_texture
@@ -137,9 +137,9 @@ for i = 1, (log_items) do
   texture:SetAllPoints(ActionLogItem[i])
 
   if (i % 2) == 1 then
-    texture:SetTexture(0.15,0.15,0.15,1)
+    texture:SetColorTexture(0.15,0.15,0.15,1)
   else
-    texture:SetTexture(0.1,0.1,0.1,1)
+    texture:SetColorTexture(0.1,0.1,0.1,1)
   end
 
   ActionLogItem[i].texture = texture
