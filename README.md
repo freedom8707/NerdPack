@@ -1,9 +1,10 @@
 <h2 align="center"><b>NerdPack engine for World of Warcraft.</b></h2>
-
+<Center><img src="https://dl.dropboxusercontent.com/u/101560647/splash.png"></Center>
 ---------------------------------------------------------------
 <br/>
 
-<p><b>NerdPack</b> is a engine/botbase/framework wich aims to be light and allow creating combat routines easly.</p>
+<p><b>NerdPack</b> is a framework wich aims to be light, fast and allow creating combat routines more easly.  
+NerdPack is divided by 2 kind of modules: <b>Basic</b> ("Legal") and <b>Protected</b> ("Ilegal"), While only using the Basic modules Nerdpack will only tell you what to do (placing a skull on top of the spell to cast) and you have to manualy press it, Protected modules will automate everything and therefor breaking WoW's TOS.</p>
 <p><b>Donate Link</b>: http://goo.gl/yrctPO</p>
 <br/>
 
