@@ -1,0 +1,26 @@
+tag 1.9
+8b2d73ae860ad345919c0bcd2677ec20dcb5b0a3
+Rainrider <rainrider.wow@gmail.com>
+2015-09-13 22:33:36 +0200
+
+Release for 6.2.2
+
+
+--------------------
+
+Rainrider:
+	- Update the list of enrage ids
+	- Bump the toc
+	- bump toc
+	- Bump minor
+	- Sort classes alphabetically
+	- Fix warlock
+	Added Observer's Clone Magic and Fel Imp's Sear Magic.
+	See code comments for further details.
+	- Fix shaman's Purify Spirit
+	IsSpellKnown returns false even if the spell is known
+	- Add Spellsteal as offensive magic dispel for mages
+	- Remove left-over symbiosis
+Adirelle:
+	- Updated the list of enrage buffs.
+	- Updated fetchEnrageList.sh to scan the paged results of wowdb.com.

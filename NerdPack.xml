@@ -1,0 +1,56 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+  <!-- external libs -->
+  <Script file="external\LibStub.lua" />
+  <Script file="external\LibDraw.lua" />
+  <Script file="external\LibBossIDs.lua" />
+  <Script file="external\dkjson.lua" />
+  <Include file="external\CallbackHandler-1.0\CallbackHandler-1.0.xml" />
+  <Script file="external\LibRangeCheck-2.0\LibRangeCheck-2.0.lua" />
+  <Script file="external\LibDispellable-1.0\LibDispellable-1.0.lua" />
+  <Script file="external\LibSharedMedia-3.0\LibSharedMedia-3.0.lua" />
+  <Script file="external\DiesalTools-1.0\DiesalTools-1.0.lua" />
+  <Script file="external\DiesalStyle-1.0\DiesalStyle-1.0.lua" />
+  <Include file="external\DiesalGUI-1.0\DiesalGUI-1.0.xml" />
+  <Include file="external\DiesalMenu-1.0\DiesalMenu-1.0.xml" />
+  <Script file="external\DiesalGUI-1.0\Objects\TableExplorer.lua" />
+
+  <!-- Core Files -->
+  <Script file="system\core.lua" />
+  <Script file="system\config.lua" />
+  <Script file="system\timeout.lua" />
+  <Script file="system\listener.lua" />
+  <Script file="system\listeners.lua" />
+
+  <!-- Locale -->
+  <Script file="locale\enUS.lua" />
+  <Script file="locale\ptBR.lua" />
+  <Script file="locale\frFR.lua" />
+  <Script file="locale\enGB.lua" />
+  <Script file="locale\itIT.lua" />
+  <Script file="locale\koKR.lua" />
+  <Script file="locale\zhCN.lua" />
+  <Script file="locale\zhTW.lua" />
+  <Script file="locale\ruRU.lua" />
+  <Script file="locale\esES.lua" />
+  <Script file="locale\esMX.lua" />
+
+    <!-- Interface -->
+  <Script file="interface\actionLog.lua" />
+  <Script file="interface\tools.lua" />
+  <Script file="interface\mainframe.lua" />
+  <Script file="interface\settings.lua" />
+
+    <!-- System -->
+  <Script file="system\library.lua" />
+  <Script file="system\APIs.lua" />
+  <Script file="system\dsl.lua" />
+  <Script file="system\conditions.lua" />
+  <Script file="system\engine.lua" /> 
+  <Script file="system\healing.lua" /> 
+  <Script file="system\ObjectManager.lua" />
+  <Script file="system\commands.lua" />
+  <Script file="facerool.lua" />
+
+</Ui>
