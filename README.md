@@ -8,8 +8,13 @@
 <br/>
 
 <h2>Modules:</h2>
-* <b>NerdPack</b>: https://github.com/MrTheSoulz/NerdPack
-* <b>Combat Routines</b>: https://github.com/MrTheSoulz/NerdPack-Routines
+* <b>NerdPack</b>:  
+The Core of NerdPack, This is needed for every other module.  
+https://github.com/MrTheSoulz/NerdPack
+
+* <b>Combat Routines</b>:  
+Default Rotations  
+https://github.com/MrTheSoulz/NerdPack-Routines
 
 <h2>Protected Modules:</h2>
 * <b>NerdPack-Protected</b>:  
