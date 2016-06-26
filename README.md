@@ -7,7 +7,7 @@
 <p><b>Donate Link</b>: http://goo.gl/yrctPO</p>
 <br/>
 
-<h2>Modules:</h2>
+<h2>Basic Modules:</h2>
 * <b>NerdPack</b>:  
 The Core of NerdPack, This is needed for every other module.  
 https://github.com/MrTheSoulz/NerdPack
