@@ -1,4 +1,4 @@
-NeP.Locale['enUS'] = {
+NeP.Locale['ptBR'] = {
 	['Any'] = {
 		['NeP_Show'] = 'Para exibir NerdPack, Execute: \n/nep show',
 		['ON'] = 'LIGADO',
