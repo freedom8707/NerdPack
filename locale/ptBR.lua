@@ -1,3 +1,9 @@
+--[[
+
+Use enUS.lua to translate from...
+
+]]
+
 NeP.Locale['ptBR'] = {
 	['Any'] = {
 		['NeP_Show'] = 'Para exibir NerdPack, Execute: \n/nep show',
