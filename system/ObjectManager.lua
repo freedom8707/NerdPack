@@ -149,38 +149,6 @@ local function BlacklistedObject(Obj)
 	return BlacklistedObjects[tonumber(ObjID)] ~= nil
 end
 
-local TrackedDummys = {
-	[31144] = 'dummy',		-- Training Dummy - Lvl 80
-	[31146] = 'dummy',		-- Raider's Training Dummy - Lvl ??
-	[32541] = 'dummy', 		-- Initiate's Training Dummy - Lvl 55 (Scarlet Enclave)
-	[32542] = 'dummy',		-- Disciple's Training Dummy - Lvl 65
-	[32545] = 'dummy',		-- Initiate's Training Dummy - Lvl 55
-	[32546] = 'dummy',		-- Ebon Knight's Training Dummy - Lvl 80
-	[32666] = 'dummy',		-- Training Dummy - Lvl 60
-	[32667] = 'dummy',		-- Training Dummy - Lvl 70
-	[46647] = 'dummy',		-- Training Dummy - Lvl 85
-	[67127] = 'dummy',		-- Training Dummy - Lvl 90
-	[87318] = 'dummy',		-- Dungeoneer's Training Dummy <Damage> ALLIANCE GARRISON
-	[87761] = 'dummy',		-- Dungeoneer's Training Dummy <Damage> HORDE GARRISON
-	[87322] = 'dummy',		-- Dungeoneer's Training Dummy <Tanking> ALLIANCE ASHRAN BASE
-	[88314] = 'dummy',		-- Dungeoneer's Training Dummy <Tanking> ALLIANCE GARRISON
-	[88836] = 'dummy',		-- Dungeoneer's Training Dummy <Tanking> HORDE ASHRAN BASE
-	[88288] = 'dummy',		-- Dunteoneer's Training Dummy <Tanking> HORDE GARRISON
-	[87317] = 'dummy',		-- Dungeoneer's Training Dummy - Lvl 102 (Lunarfall - Damage)
-	[87320] = 'dummy',		-- Raider's Training Dummy - Lvl ?? (Stormshield - Damage)
-	[87329] = 'dummy',		-- Raider's Training Dummy - Lvl ?? (Stormshield - Tank)
-	[87762] = 'dummy',		-- Raider's Training Dummy - Lvl ?? (Warspear - Damage)
-	[88837] = 'dummy',		-- Raider's Training Dummy - Lvl ?? (Warspear - Tank)
-	[88906] = 'dummy',		-- Combat Dummy - Lvl 100 (Nagrand)
-	[88967] = 'dummy',		-- Training Dummy - Lvl 100 (Lunarfall, Frostwall)
-	[89078] = 'dummy',		-- Training Dummy - Lvl 100 (Lunarfall, Frostwall)
-}
-
-local function isDummy(Obj)
-	local _,_,_,_,_,ObjID = strsplit('-', UnitGUID(Obj) or '0')
-	return TrackedDummys[tonumber(ObjID)] ~= nil
-end
-
 local Classifications = {
 	['minus'] 		= 1,
 	['normal'] 		= 2,
