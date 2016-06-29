@@ -46,6 +46,7 @@
   <Script file="system\library.lua" />
   <Script file="system\APIs.lua" />
   <Script file="system\dsl.lua" />
+  <script file="system\ttd.lua" />
   <Script file="system\conditions.lua" />
   <Script file="system\engine.lua" /> 
   <Script file="system\healing.lua" /> 

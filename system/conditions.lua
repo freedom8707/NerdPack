@@ -867,45 +867,16 @@ NeP.DSL.RegisterConditon("time", function(target, range)
 end)
 
 local deathTrack = { }
-NeP.DSL.RegisterConditon("deathin", function(target, range)
-	-- Make sure the unit is valid
-	if UnitExists(target) and UnitGUID(target) then
-		local guid = UnitGUID(target)
-		if deathTrack[target] then
-			if deathTrack[target].guid == guid then
-				local start = deathTrack[target].time
-				local currentHP = UnitHealth(target)
-				local maxHP = deathTrack[target].start
-				local diff = maxHP - currentHP
-				local dura = GetTime() - start
-				local hpps = diff / dura
-				local death = currentHP / hpps
-				if death == math.huge then
-					return 8675309
-				elseif death < 0 then
-					return 0
-				else
-					return death
-				end
-			else
-				deathTrack[target] = { }
-			end
-		else
-			deathTrack[target] = { }
-		end
-		deathTrack[target].guid = guid
-		deathTrack[target].time = GetTime()
-		deathTrack[target].start = UnitHealth(target)
-	end
-	return 8675309
+NeP.DSL.RegisterConditon("deathin", function(target)
+	return NeP.TimeToDie(target)
 end)
 
-NeP.DSL.RegisterConditon("ttd", function(target, range)
+NeP.DSL.RegisterConditon("ttd", function(target)
 	return NeP.DSL.Conditions["deathin"](target)
 end)
 
 NeP.DSL.RegisterConditon("role", function(target, role)
-	role = role:upper()
+	local role = role:upper()
 
 	local damageAliases = { "DAMAGE", "DPS", "DEEPS" }
 

@@ -14,7 +14,7 @@ local function onEvent(self, event, ...)
 	end
 end
 
-local frame = CreateFrame('Frame', 'PE_Events')
+local frame = CreateFrame('Frame', 'NeP_Events')
 frame:SetScript('OnEvent', onEvent)
 
 function listener.register(name, event, callback)
@@ -32,21 +32,23 @@ function listener.register(name, event, callback)
 	table.insert(listeners[event], { name = name, callback = callback })
 end
 
-function listener.unregister(event, name, callback)
+function listener.unregister(name, event, callback)
 	if not callback then
 		name, callback = 'default', name
 	end
 
-	for i = 1, #listeners[event] do
-		if listeners[event][i].name == name or listeners[event][i].callback == callback then
-			--debug.print('Event Unregistered: ' .. event .. ', ' .. name, 'listener')
-			table.remove(listeners[event], i)
+	if listeners[event] then
+		for i = 1, #listeners[event] do
+			if listeners[event][i].name == name or listeners[event][i].callback == callback then
+				--debug.print('Event Unregistered: ' .. event .. ', ' .. name, 'listener')
+				table.remove(listeners[event], i)
+			end
 		end
-	end
 
-	if #listeners[event] == 0 then
-		listeners[event] = nil
-		frame:UnregisterEvent(event)
+		if #listeners[event] == 0 then
+			listeners[event] = nil
+			frame:UnregisterEvent(event)
+		end
 	end
 end
 
