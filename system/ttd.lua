@@ -6,7 +6,7 @@ local fakeTTD = 99999
 
 -- Two arrays to hold the information we need to calculate the DPS on each mob
 local TimeFirstDamaged = {}
-AmountHPLost = {}
+local AmountHPLost = {}
 
 -- are we currently watching the combat log?
 local IsLogging = false
