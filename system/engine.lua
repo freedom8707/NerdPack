@@ -159,6 +159,56 @@ local function checkTarget(target)
 	return false
 end
 
+local function castSanityCheck(spell)
+	if type(spell) == 'string' then
+		
+		-- Turn string to number
+		if string.match(spell, '%d') then
+			spell = tonumber(spell)
+		end
+
+		-- SOME SPELLS DO NOT CAST BY IDs! (make them names...)
+		local spell = GetSpellInfo(spell)
+		if spell then
+			NeP.Core.Debug('Engine', 'castSanityCheck_Spell:'..tostring(spell))
+			
+			-- Make sure we have the spell
+			local skillType, spellId = GetSpellBookItemInfo(tostring(spell))
+			if skillType == 'FUTURESPELL' then 
+				NeP.Core.Debug('Engine', 'castSanityCheck hit FUTURESPELL')
+				return false
+			end
+
+			-- Set Var (Gonna be needed for checking target)
+			HarmfulSpell = IsHarmfulSpell(spell)
+
+			-- Spell Sanity Checks
+			if IsUsableSpell(spell) and GetSpellCooldown(spell) == 0 then
+				NeP.Core.Debug('Engine', 'castSanityCheck passed')
+				NeP.Engine.Current_Spell = spell
+				return true, spell
+			end
+		end
+		
+	end
+	return false, nil
+end
+
+local function canIterate()
+	if UnitCastingInfo('player') == nil
+	and UnitChannelInfo('player') == nil
+	and not UnitIsDeadOrGhost('player') then
+		return true
+	end
+	return false
+end
+
+local function castingTime(target)
+    local _,_,_,_,_, endTime= UnitCastingInfo(target)
+    if endTime then return endTime end
+    return false
+end
+
 local invItems = {
 	['head']		= 'HeadSlot',
 	['helm']		= 'HeadSlot',
@@ -190,52 +240,6 @@ local invItems = {
 	['ranged'] 		= 'RangedSlot'
 }
 
--- Spells added here will be ignored on IsUsableSpell API
-local IgnoreSpells = {
-	[17] = 'Power Word: Shield'
-}
-
-local function castSanityCheck(spell)
-	if type(spell) == 'string' then
-		-- Turn string to number
-		if string.match(spell, '%d') then
-			spell = tonumber(spell)
-		end
-		-- SOME SPELLS DO NOT CAST BY IDs! (make them names...)
-		local spell = GetSpellInfo(spell)
-		local spellIndex, spellBook = GetSpellBookIndex(spell)
-		if not spellIndex then return false end
-		local skillType, spellId = GetSpellBookItemInfo(spellIndex, spellBook)
-		if skillType == 'FUTURESPELL' or not spellId then return false end
-
-		-- Set Var (Gonna be needed for checking target)
-		HarmfulSpell = IsHarmfulSpell(spellIndex, spellBook)
-
-		-- Spell Sanity Checks
-		if (IsUsableSpell(spellIndex, spellBook) or IgnoreSpells[spellId])
-		and GetSpellCooldown(spell) == 0 then
-			NeP.Engine.Current_Spell = spell
-			return true, spell
-		end
-	end
-	return false, nil
-end
-
-local function canIterate()
-	if UnitCastingInfo('player') == nil
-	and UnitChannelInfo('player') == nil
-	and not UnitIsDeadOrGhost('player') then
-		return true
-	end
-	return false
-end
-
-local function castingTime(target)
-    local _,_,_,_,_, endTime= UnitCastingInfo(target)
-    if endTime then return endTime end
-    return false
-end
-
 local SpecialTrigers = {
 	-- Cancel cast
 	['!'] = function(spell, conditons, target)
@@ -264,8 +268,7 @@ local SpecialTrigers = {
 			local conditions = NeP.DSL.parse(conditons, spell)
 			if conditions then
 				if invItems[tostring(item)] then
-					local item = invItems[tostring(item)]
-					local item = GetInventoryItemID('player', item)
+					local item = GetInventoryItemID('player', invItems[tostring(item)])
 					local isUsable, notEnoughMana = IsUsableItem(item)
 					if isUsable then
 						local itemStart, itemDuration, itemEnable = GetInventoryItemCooldown('player', item)
@@ -328,42 +331,55 @@ function Engine.Iterate(table)
 		local spell = line[1]
 		local target = line[3]
 		local _type = type(spell)
+		NeP.Core.Debug('Engine', 'Iterate: TYPE_'.._type..' -- '..tostring(spell))
 		-- Nested
 		if _type == 'table' then
+			NeP.Core.Debug('Engine', 'Iterate: Hit Table')
 			local conditions = NeP.DSL.parse(line[2], '')
 			if conditions then
+				NeP.Core.Debug('Engine', 'Iterate: passed Table conditions')
 				IterateNest(spell)
 			end
 		-- Function
 		elseif _type == 'function' then
+			NeP.Core.Debug('Engine', 'Iterate: Hit Func')
 			if canIterate() then
 				local conditions = NeP.DSL.parse(line[2], '')
 				if conditions then
+					NeP.Core.Debug('Engine', 'Iterate: passed func conditions')
 					spell()
 					break
 				end
 			end
 		-- Normal cast
 		elseif _type == 'string' then
+			NeP.Core.Debug('Engine', 'Iterate: Hit String')
 			local prefix = string.sub(spell, 1, 1)
 			-- Pause
 			if spell == 'pause' then
+				NeP.Core.Debug('Engine', 'Iterate: Hit Pause')
 				local conditions = NeP.DSL.parse(line[2], spell)
 				if conditions then
+					NeP.Core.Debug('Engine', 'Iterate: passed pause conditions')
 					break
 				end
 			-- Special trigers
 			elseif SpecialTrigers[prefix] then
+				NeP.Core.Debug('Engine', 'Iterate: Hit Special Trigers')
 				local shouldBreak = SpecialTrigers[prefix](spell, line[2], target)
 				if shouldBreak then break end
 			-- Regular sanity checks
 			elseif canIterate() then
+				NeP.Core.Debug('Engine', 'Iterate: Hit Normal')
 				local canCast, spell = castSanityCheck(spell)
 				if canCast then
+					NeP.Core.Debug('Engine', 'Iterate: Can Cast')
 					local conditions = NeP.DSL.parse(line[2], spell)
 					if conditions then
+						NeP.Core.Debug('Engine', 'Iterate: passed cast conditions')
 						local hasTarget, target, ground = checkTarget(target)
 						if hasTarget then
+							NeP.Core.Debug('Engine', 'Iterate: Has Target: '..target..' Ground: '..tostring(ground))
 							Cast(spell, target, ground)
 							break
 						end
