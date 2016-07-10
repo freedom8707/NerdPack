@@ -80,6 +80,10 @@ local ListClassSpec = {
 		[103] = 'Feral Combat',
 		[104] = 'Guardian',
 		[105] = 'Restoration',
+	},
+	[12] = { -- Demon Hunter
+		[577] = 'Havoc',
+		[581] = 'Vengeance',
 	}
 }
 
@@ -96,7 +100,7 @@ function Engine.registerRotation(SpecID, CrName, InCombat, outCombat, initFunc)
 		local TableName = CrName
 		if NeP.Engine.Rotations[SpecID][CrName] ~= nil then TableName = CrName..'_'..math.random(0,1000) end
 		-- Create CR table
-		NeP.Engine.Rotations[SpecID][TableName] = { 
+		NeP.Engine.Rotations[SpecID][TableName] = {
 			[true] = InCombat,
 			[false] = outCombat,
 			['InitFunc'] = initFunc or (function() return end),
@@ -139,7 +143,7 @@ local function checkTarget(target)
 	local ground = false
 	-- Allow functions/conditions to force a target
 	if NeP.Engine.ForceTarget then
-		target = NeP.Engine.ForceTarget	
+		target = NeP.Engine.ForceTarget
 		NeP.Engine.ForceTarget = nil
 	end
 	-- Ground target
@@ -402,13 +406,13 @@ end
 -- Engine Ticker
 local LastTimeOut = 0
 C_Timer.NewTicker(0.1, (function()
-	
+
 	local Running = NeP.Config.Read('bStates_MasterToggle', false)
 	if Running and not NeP.Engine.forcePause then
-		
+
 		local CurrentTime = GetTime();
 		if CurrentTime >= LastTimeOut then
-			
+
 			local TimeOut = EngineTimeOut()
 
 			-- Hide FaceRoll.
