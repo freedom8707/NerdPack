@@ -26,9 +26,9 @@ local function RefreshOM()
 					id = Obj.id,
 					class = Obj.class,
 					distance = NeP.Engine.Distance('player', Obj.key),
-					health = math.floor((UnitHealth(Obj.key) / UnitHealthMax(Obj.key)) * 100), 
-					maxHealth = UnitHealthMax(Obj.key), 
-					actualHealth = UnitHealth(Obj.key), 
+					health = math.floor((UnitHealth(Obj.key) / UnitHealthMax(Obj.key)) * 100),
+					maxHealth = UnitHealthMax(Obj.key),
+					actualHealth = UnitHealth(Obj.key),
 				}
 			end
 		end
@@ -43,9 +43,9 @@ local function RefreshOM()
 					id = Obj.id,
 					class = Obj.class,
 					distance = NeP.Engine.Distance('player', Obj.key),
-					health = math.floor((UnitHealth(Obj.key) / UnitHealthMax(Obj.key)) * 100), 
-					maxHealth = UnitHealthMax(Obj.key), 
-					actualHealth = UnitHealth(Obj.key), 
+					health = math.floor((UnitHealth(Obj.key) / UnitHealthMax(Obj.key)) * 100),
+					maxHealth = UnitHealthMax(Obj.key),
+					actualHealth = UnitHealth(Obj.key),
 				}
 			end
 		end
@@ -208,10 +208,10 @@ function NeP.OM.addToOM(Obj)
 		end
 	end
 end
-	
+
 -- Create a Temp OM contating all Objects
 C_Timer.NewTicker(1, (function()
-		
+
 	-- wait until added from unlocker.
 	if NeP.OM.Maker ~= nil then
 
@@ -233,7 +233,7 @@ C_Timer.NewTicker(1, (function()
 end), nil)
 
 local DiesalTools = LibStub('DiesalTools-1.0')
-local DiesalStyle = LibStub('DiesalStyle-1.0') 
+local DiesalStyle = LibStub('DiesalStyle-1.0')
 local DiesalGUI = LibStub('DiesalGUI-1.0')
 local DiesalMenu = LibStub('DiesalMenu-1.0')
 local SharedMedia = LibStub('LibSharedMedia-3.0')
@@ -298,14 +298,15 @@ local function RefreshGUI()
 		local Obj = tempTable[i]
 		local ID = Obj.id or ''
 		local Name = Obj.name or ''
+		local Distance = Obj.distance or ''
 		local Health = Obj.health or 100
 		local classColor = NeP.Core.classColor(Obj.key)
 		local statusBar = getStatusBar()
 
 		statusBar.frame:SetPoint('TOP', ListWindow.content, 'TOP', 2, offset )
 		statusBar.frame.Left:SetText('|cff'..classColor..Name)
-		statusBar.frame.Right:SetText('( |cffff0000ID|r: '..ID..' / |cffff0000Health|r: '..Health..' )')
-		
+		statusBar.frame.Right:SetText('( |cffff0000ID|r: '..ID..' / |cffff0000Health|r: '..Health..' / |cffff0000Distance|r: '..Distance..' )')
+
 		statusBar.frame:SetScript('OnMouseDown', function(self) TargetUnit(Obj.key) end)
 		statusBar:SetValue(Health)
 		offset = offset -17
